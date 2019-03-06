@@ -1,0 +1,26 @@
+{
+  "name": "serverless-chatmark",
+  "version": "1.0.0",
+  "description": "",
+  "main": "handler/handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "seq": "./node_modules/.bin/sequelize"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.392.0",
+    "dotenv": "^6.1.0",
+    "jsonwebtoken": "^8.4.0",
+    "moment": "^2.22.2",
+    "pg-promise": "^7.3.2",
+    "randomstring": "^ 1.1.5",
+    "sequelize": "^4.42.0",
+    "shortid": "^2.2.14",
+    "uuid": "^2.0.3"
+  },
+  "author": "Chris Chan",
+  "license": "ISC",
+  "devDependencies": {
+    "sequelize-cli": "^5.4.0"
+  }
+}

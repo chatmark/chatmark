@@ -3,9 +3,52 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "watch": {},
+  "nodemonConfig": {
+    "watch": [
+      "src/",
+      "serverless.yml"
+    ],
+    "ext": "js, yml, json"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "postshrinkwrap": "if [ \"`uname`\" = \"Darwin\" ]; then sed -i '' -e 's/http:\\/\\//https:\\/\\//g' package-lock.json; else sed -i -e 's/http:\\/\\//https:\\/\\//g' package-lock.json; fi",
+    "lint": "./node_modules/eslint/bin/eslint.js .",
+    "debug": "export SLS_DEBUG=* && node --inspect ./node_modules/.bin/serverless offline",
+    "start": "./node_modules/.bin/serverless offline",
+    "install": "npm run install:lambda; npm run install:test",
+    "install:lambda": "(cd src; npm install)",
+    "install:test": "(cd test; npm install)",
+    "run_local": "./bin/server.js start",
+    "run_local_3000": "npm run run_local -- -p 3000",
+    "watch": "nodemon ./bin/server.js start -t sls-offline -p 3000",
+    "watch_run_local": "nodemon ./bin/server.js start",
+    "watch_run_local_3000": "nodemon ./bin/server.js start -p 3000",
+    "test": "multi=\"mocha-osx-reporter=- spec=-\" ./node_modules/mocha/bin/mocha --timeout 200000 --reporter mocha-multi --colors",
+    "test_local": "TEST_SERVER_TYPE=sam-api npm run test",
+    "test_offline": "TEST_SERVER_TYPE=offline npm run test",
+    "kill_port_3000": "kill $(lsof -t -i :3000)"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.5.3",
+    "commander": "^2.19.0",
+    "dotenv": "^6.2.0",
+    "eslint": "^5.12.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-chai-friendly": "^0.4.1",
+    "eslint-plugin-import": "^2.14.0",
+    "get-port": "^4.0.0",
+    "jsonwebtoken": "^8.4.0",
+    "mocha": "^5.2.0",
+    "mocha-multi": "^1.0.1",
+    "mocha-osx-reporter": "^0.1.2",
+    "nodemon": "^1.18.9",
+    "serverless": "^1.35.1",
+    "serverless-dotenv-plugin": "^2.0.1",
+    "serverless-offline": "^3.31.3",
+    "serverless-plugin-additional-stacks": "^1.2.0",
+    "serverless-sam": "0.0.5"
+  }
 }

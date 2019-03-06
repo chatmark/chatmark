@@ -15,7 +15,20 @@ service: aws-nodejs # NOTE: update this with your service name
 
 # You can pin your service to only deploy with a specific Serverless version
 # Check out our docs for more details
-# frameworkVersion: "=X.X.X"
+frameworkVersion: ">=1.1.0 <2.0.0"
+
+package:
+  exclude:
+    - bin/**
+    - test/**
+    - node_modules/**
+    - lib/serverManager.js
+
+plugins:
+  - serverless-sam
+  - serverless-offline
+  - serverless-dotenv-plugin
+  - serverless-plugin-additional-stacks
 
 provider:
   name: aws
